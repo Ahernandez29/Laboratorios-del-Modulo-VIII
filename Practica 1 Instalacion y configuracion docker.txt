@@ -1,0 +1,48 @@
+Practica 1: Instalacion y configuracion de Docker (1Pts)
+
+------------------------------------------------------------------------------------------
+1- INSTALAR DOCKER
+-----------------------------------------------------------------------------------------
+
+1- Actualizar los repositorios
+
+ sudo dnf update
+
+2- AGREGAR EL REPOSITORIO DE DOCKER
+
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+3- INSTALAR LOS SIGUIENTES PAQUETES:
+
+sudo dnf install docker-ce docker-ce-cli containerd.io
+
+4- HABILITAR LOS SERVICIOS DOCKER Y CONTAINERD
+
+sudo systemctl enable --now docker containerd
+
+5- (Opcional) Paso 6: Ejecutar Docker sin usar sudo
+Para evitar escribir sudo en cada comando:
+
+sudo usermod -aG docker $USER
+
+Luego, cierra sesión y vuelve a entrar para que surta efecto.
+
+
+--------------------------------------------------------------------------------------------
+2-DESCARGAR UNA IMAGEN DE NGINX WEB SERVER (DESDE LA DOCKERHUB)
+--------------------------------------------------------------------------------------------
+
+2- docker pull nginx
+
+3- CREAR UN CONTENEDOR A PARTIR DE LA IMAGEN NGINX EN LA QUE EL PUERTO 8888 DEL HOST SERA REDIRECCIONADO AL PUERTO 80 DEL CONTENEDOR DE NGINX, DE IGUAL FORMA MONTAR UN VOLUMEN PERSISTENTE /HOME/WEBSITE ---) /USR/SHARE/NGINX/HTML
+
+-sudo mkdir docker-web
+
+-docker run -d -p 8888:80 -v /home/ahernandez/docker-web/:/usr/share/nginx/html/ --name my-nginx nginx
+
+4- Crear una pagina HTML sencilla la cual tenga su nombre y matricula y nombrarla como index.html, una vez creada copiarla al la ruta del volumen persistente para que la misma puedea ser visualizada por el contenedor (/home/website)
+
+-sudo nano index.html
+<h1>argenis 20240916</h1>
+
+

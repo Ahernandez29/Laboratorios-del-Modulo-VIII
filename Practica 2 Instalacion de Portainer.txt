@@ -1,0 +1,17 @@
+Practica 2: Instalacion de Portainer (1Pts)
+
+------------------------------------------------------------------------------------------
+1- DESCARGAR DESDE LA DOCKERHUB UNA IMAGEN PORTAINER
+------------------------------------------------------------------------------------------
+
+sudo dnf install portainer/portainer-ce
+
+------------------------------------------------------------------------------------------
+2- CREAR A PARTIR DE LA IMAGEN, UN CONTENEDOR Y MAPEAR TODOS LOS PUERTOS INTERNOS DEL CONTENEDOR A LOS PUERTOS EXTERNOS DEL HOST
+------------------------------------------------------------------------------------------
+
+docker run -d -p 9000:9000 portainer/portainer-ce
+
+3- Ingresar a la interfaz de administracion de portainer (127.0.0.1:9000) y vincularla con el Docker Engine que se encuentra corriendo en el host local
+
+4- Una vez se encuentre conectada, detener el contenedor de GNINX (de la practica previa) a travez de container, muestre el resultado en el navegador Web

@@ -1,0 +1,74 @@
+DOCKER COMPOSE WORDPRESS
+
+----------------------------------------------------------------------------------------
+Practica #3: IDespliegue de contenedor de Wordpress utilizando Docker-Compose 
+------------------------------------------------------------------------------------------
+1-DESCARGAR DESDE LA DOCKERHUB UNA IMAGEN DE PORTAINER
+------------------------------------------------------------------------------------
+
+sudo dnf install docker-compose-plugin
+
+------------------------------------------------------------------------------
+2- Creen un archivo llamado docker-compose.yml donde se especifiquen las Variables de entorno que usaran los contenedores asi como un contenedor par ala BD y uno par ael aplicativo de WordPress
+----------------------------------------------------------------------------------------
+
+- CREAR UNA CARPETA PARA EL PROYECTO
+
+sudo mkdir wordpress-compose
+
+- CREAR ARCHIVO DOCKER-COMPOSE.YML
+
+sudo nano docker-compose.yml
+
+- AGREGAR LAS SIGUIENTES VARIABLES:
+
+version: "3" 
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: MySQLRootPassword
+      MYSQL_DATABASE: mysqldatabase
+      MYSQL_USER: ahernandez
+      MYSQL_PASSWORD: 1234
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ahernandez
+      WORDPRESS_DB_PASSWORD: 1234
+      WORDPRESS_DB_NAME: mysqldatabase
+    volumes:
+      - "./:/var/www/html"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: MySQLUsername
+      PMA_PASSWORD: MySQLUserPassword
+
+volumes:
+  mysql: {}
+
+-----------------------------------------------------------------------------------------
+3- REALIZAR EL DESPLIEGUE DE LOS CONTENEDORES UTILIZANDO DOCKER COMPOSE
+----------------------------------------------------------------------------------------
+
+docker-compose up -d
+
+----------------------------------------------------------------------------------------
+4- UNA VEZ FINALIZADO EL DESPLIEGUE, INGRESAR MEDIANTE EL NAVEGADOR Y CONFIGURAR WORDPRESS PARA SU CORRECTO USO.
+-------------------------------------------------------------------------------------------
+
+en el navegador ingresar localhost:80
