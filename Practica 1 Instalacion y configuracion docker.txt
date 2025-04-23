@@ -45,4 +45,40 @@ Luego, cierra sesión y vuelve a entrar para que surta efecto.
 -sudo nano index.html
 <h1>argenis 20240916</h1>
 
+COMANDOS DOCKER
+***************
+0- DESCARGAR UNA IMAGEN
+sudo docker pull -nombre-de-la-imagen-
+
+1- VER LA VERSION DE DOCKER INSTALADA
+docker -v
+
+2- VER INFO DE DOCKER
+sudo docker info
+
+3- PARA LISTAR CONTENEDORES EN EJECUCION
+sudo docker ps
+
+4- LISTAR CONTENEDORES Q NO SE ENCUENTREN EN EJECUCION
+sudo docker ps -a
+
+5 LISTAR IMAGENES EN EL SISTEMA
+sudo docker image ls
+
+6- CREAR Y EJECUTAR UN CONTENEDOR
+sudo docker run -d -p 8080:80 httpd
+-d para ejecutar el servicio como daemon en segundo plano
+-p 8080:80 mapea el puerto 8080 de la maquina al puerto 80 del contenedor (httpd)
+
+sudo docker run -d -t --name nombre-deseado ubuntu
+
+7- PARAR UN CONTENEDOR
+sudo docker stop id-container
+
+8- ELIMINAR UN CONTENEDOR
+sudo docker rm + id-contenedor
+
+12- ACCEDER A LA TERMINAL DE UN DOCKER EN EJECUCION SUPONIENDO QUE TIENEN DISPONIBLE BASH
+sudo docker exec -it ubuntu bash
+
 
